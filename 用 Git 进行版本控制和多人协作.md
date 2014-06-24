@@ -111,7 +111,7 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 还是在 Gitbash 或 *nix终端 (下文这两者都简称为 Gitbash) 里:
 
     git config --global user.email "你的邮箱_最好是github注册邮箱吧_貌似需要带着引号"
-    git config --global user.name "能标识你的名字_最好是github 用户名_貌似需要带着引号"
+    git config --global user.name "能标识你的名字_最好是github 用户名_貌似大小写敏感_貌似需要带着引号"
 
 
 ## 5. 把仓库 clone 到本地
