@@ -79,7 +79,7 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 
 具体操作: (来自 https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E8%AE%BE%E7%BD%AE-Git#wiki)
 + Windows: 打开刚才安的 Git 客户端里的 Gitbash
-+ Linux / OS X: 打开终端
++ Linux / OS X (下文简称 *nix): 打开终端
 
         cd ~/.ssh
 
@@ -102,6 +102,31 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 
     最终出现:
 
-        Hi SnowOnion! You've successfully authenticated, but GitHub does not provide shell access.
+        Hi <你的用户名>! You've successfully authenticated, but GitHub does not provide shell access.
 
     即为添加成功.
+
+## 4. 一些设置
+
+还是在 Gitbash 或 *nix终端 (下文这两者都简称为 Gitbash) 里:
+
+    git config --global user.email "你的邮箱_最好是github注册邮箱吧_貌似需要带着引号"
+    git config --global user.name "能标识你的名字_最好是github 用户名_貌似需要带着引号"
+
+
+## 5. 把仓库 clone 到本地
+
+我们的 组织 是 https://github.com/315outsource2011
+
+https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; 组织的每一个成员都是这个仓库的所有者, 可以进行任何操作.
+
+进入 https://github.com/315outsource2011/badong-prototype , 在右下角找到 HTTPS clone URL 或 SSH clone URL, 如果不是 SSH clone URL 就点 SSH 切换到 SSH clone URL.
+
+复制那个地址(实际上就是 git@github.com:315outsource2011/badong-prototype.git )
+
+然后在Gitbash中:
+    cd 到合适的文件夹
+    git clone git@github.com:315outsource2011/badong-prototype.git
+这会在当前文件夹下建立一个 badong-prototype 文件夹, 并且把仓库里的代码下载到那里.
+
+## 未完待续. 请不要随意 commit 和 push 到主分支(master). 请等一下分支部分的教程, 或自行学习一下《Pro git》中分支的部分...
