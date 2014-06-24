@@ -125,8 +125,11 @@ https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; �
 复制那个地址(实际上就是 git@github.com:315outsource2011/badong-prototype.git )
 
 然后在Gitbash中:
+
     cd 到合适的文件夹
+
     git clone git@github.com:315outsource2011/badong-prototype.git
+    
 这会在当前文件夹下建立一个 badong-prototype 文件夹, 并且把仓库里的代码下载到那里.
 
 ## 未完待续. 请不要随意 commit 和 push 到主分支(master). 请等一下分支部分的教程, 或自行学习一下《Pro git》中分支的部分...
