@@ -2,7 +2,7 @@
 ===========
 作者: SnowOnion LEE
 
-本作品遵循 CC 3.0 署名 - 相同方式共享 许可.
+本作品遵循 [CC 3.0 署名 - 相同方式共享 许可](http://zh.wikipedia.org/wiki/%E5%88%9B%E4%BD%9C%E5%85%B1%E7%94%A8#.E5.85.AD.E7.A8.AE.E6.A0.B8.E5.BF.83.E6.8E.88.E6.AC.8A.E6.A2.9D.E6.AC.BE).
 
 # SnowOnion 的说明
 
