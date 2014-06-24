@@ -1,0 +1,283 @@
+# Meta
+
+SnowOnion 看《Pro git 中文版》的笔记.
+
+这个文档可以弄个思维导图诶~
+
+这个文档的语法是 markdown-like psudocode... 亦非 Github-Flavored Markdown.
+
+# 基础
+
+git diff: 未staged 的变化
+git diff --cached: 已经暂存起来的文件和上次提交时的快照之间的差异
+
+
+提交后它会告诉你，当前是在哪个分支（master）提交的，本次提交的完整SHA-1 校验和是什么（463dc4f），以及在本次提交中，有多少文件修订过，多少行添改和删
+改过。
+每一次运行提交操作，都是对你项目作一次快照，以后可以回到这个状态，或者进行比较。
+
+
+给git commit 加上-a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过git add 步骤
+    想要撤消刚才的提交操作，可以使用--amend 选项重新提交：$ git commit --amend
+    pdf35 取消系列
+
+
+想回顾下提交历史，可以使用git log 命令
+  我们常用-p 选项展开显示每次提交的内容差异，用-2 则仅显示最近的两次更新：
+  许多摘要选项可以用，比如--stat，仅显示简要的增改行数统计
+  git log --pretty=format:"%h - %an, %ar : %s"
+
+
+运行git mv 就相当于运行了下面三条命令：
+$ mv README.txt README
+$ git rm README.txt
+$ git add README
+
+
+当你为某个项目发去补丁，然后某个核心成员将你的补丁并入项目时，你就是作者(author)，而那个核心成员就是提交者(committer)。
+
+用oneline 或format 时结合--graph 选项，可以看到开头多出一些ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况
+
+gitk 图形界面
+    /usr/bin/gitk: line 3: exec: wish: not found
+
+
+# 远程
+1.
+git remote 命令，它会列出每个远程库的简短名字
+    -v 选项（译注：此为—verbose 的简写，取首字母），显示对应的克隆地址：
+
+origin 的远程库，Git 默认使用这个名字来标识你所克隆的原始仓库
+
+2.
+git remote add [shortname] [url]：
+
+3.
+要抓取所有 pb 远程仓库有的，但本地仓库没有的信息，可以运行 git fetch pb
+====.
+* [new branch] master -> pb/master
+* [new branch] ticgit -> pb/ticgit
+现在，Paul 的主干分支（master）已经完全可以在本地访问了，对应的名字是pb/master，你可以将它合并
+到自己的某个分支，或者切换到这个分支，看看有些什么有趣的更新。
+------.
+fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能手工合并。
+
+4.
+实际上，默认情况下git clone 命令本质上就是自动创建了本地的master 分支用于跟踪远程仓库中的
+master 分支（假设远程仓库确实有master 分支）。所以一般我们运行git pull，目的都是要从原始克隆的远
+端仓库中抓取数据后，合并到工作目录中当前分支。
+
+git push [remote-name] [branch-name]
+  本地的master 分支推送到origin 服务器上:
+  git push origin master
+    只有在所克隆的服务器上有写权限，或者同一时刻没有其他人在推数据，这条命令才会如期完成任务
+    如果在你推数据前，已经有其他人推送了若干更新，那你的推送操作就会被驳回。你必须先把他们的更新抓取到本地，并到自己的项目中，然后才可以再次推送
+
+查看某个远程仓库的详细信息
+git remote show [remote-name]
+
+git remote rename src tar
+git remote rm src
+
+5.
+轻量级标签实际上就是一个保存着对应提交对象的校验和信息的文件
+  git tag v1.4-lw
+  git show v1.4-lw
+含附注的标签 annotated 的首字母
+  git tag -a v1.4 -m 'my version 1.4'
+如果你有自己的私钥，还可以用GPG 来签署标签，只需要把之前的-a 改为-s （译注： 取Signed
+  git tag -s v1.5 -m 'my signed 1.5 tag'
+
+后期加注标签
+  git log --pretty=oneline 单行展示历史提交
+  对应提交对象的校验和（或前几位字符）即可
+  git tag -a v1.2 9fceb02
+
+6.
+默认情况下，git push 并不会把标签传送到远端服务器上 显式 命令格式如同推送分支
+  git push origin v1.5
+如果要一次推送所有（本地新增的）标签上去，可以使用--tags 选项：
+$ git push origin --tags
+
+7.
+pdf45 自动完成和命令别名
+
+# 分支
+
+0.
+ASCII art 地查看分支:
+http://www.v2ex.com/t/84206
+0.1. git show-branch 有点紧
+0.2. git log --graph --decorate --all 挺好.. 树枝很伸展..
+    git config --global alias.lgda "log --graph --decorate --all"
+
+0.0. 比较两个 commit, 用 hash 值的前 4 位就可以
+    git diff 79b2 1bb0
+
+0.1. 比较两个 branch
+    git diff master testing
+
+1.
+复习这一点: Git 保存的不是文件差异或者变化量，而只是一系列文件快照
+在Git 中提交时，会保存一个提交（commit）对象，它包含一个指向暂存内容快照的指针, 以及该提交对象直接祖先的指针
+  第一次提交是没有直接祖先的，普通提交有一个祖先，由两个或多个分支合并产生的提交则有多个祖先。
+
+
+2.
+。Git 中的分支，其实本质上仅仅是个指向commit 对象的可变指针。
+
+
+3.
+创建一个新的分支指针。比如新建一个testing分支，
+git branch testing
+    git branch 查看有哪些分支
+    git branch -v 查看每个分支的最后一次提交
+
+，Git 是如何知道你当前在哪个分支上工作的呢？其实答案也很简单，它保存着一个名为HEAD 的特别指针
+运行git branch 命令，仅仅是建立了一个新的分支，但不会自动切换到这个分支中去，所以在这个例子中，我们依然还在master 分支里工作
+
+。我们现在转换到新建的testing 分支：
+$ git checkout testing
+
+修改, 提交, checkout 回来, etc.
+
+
+4.
+Git 鼓励开发者频繁使用分支
+
+新建并切换到该分支
+git checkout -b iss53
+
+切换回master 分支之前，留心你的暂存区或者工作目录里，那些还没有提交的修改，它会和你即将检出的分支产生
+冲突从而阻止Git 为你转换分支。转换分支的时候最好保持一个清洁的工作区域。稍后会介绍几个绕过这种
+问题的办法（分别叫做stashing 和amending）。
+  ：Git 会把工作目录的内容恢复为检出某分支时它所指向的那个commit 的快照。
+
+
+5.
+merge!
+
+5.0. 合并时遇到冲突想取消操作，恢复index(?)，用
+    git merge --abort
+5.1. 撤销上一次成功的 merge, 用
+    git reset --hard HEAD~
+ref: http://segmentfault.com/q/1010000000140446
+
+[enFeature分支与deBug分支.png]
+git checkout master
+$ git merge hotfix
+  “Fast forward”（快进）提示。由于当前master 分支所在的commit 是要并入的hotfix 分支的直接上游，Git 只需把指针直接右移。
+  没有什么分歧需要解决
+
+。因为现在hotfix 分支和master 指向相同的提交，现在没什么用了，可以先删掉它。
+  git branch -d hotfix
+
+
+[enFeature分支与deBug分支2.png]
+$ git checkout master
+$ git merge iss53
+就此例而言，Git 会用两个分支的末端（C4 和C5）和它们的共同祖先（C2）进行一次简单的三方合并计算
+
+Git 没有简单地把分支指针右移，而是对三方合并的结果作一新的快照，并自动创建一个指向它的commit（C6）（见图3.17）。
+我们把这个特殊的commit 称作合并提交（merge commit），因为它的祖先不止一个。
+
+6.
+git branch --merged 或 git branch --no-merged
+
+7. 分支管理法
+
+一些原则:
+    + master分支放稳定的代码
+    + 添加 feature 开形如issue分支
+    + 改 bug 开形如 hotfix 分支
+    + 用代码来讨论进化方向 开形如topic分支
+
+
+# 远程分支 因为很重要所以用一级标题
+
+0.
+远程分支（remote branch）是对远程仓库状态的索引。它们是一些无法移动的本地分支；只有在进行Git
+的网络活动时才会更新。远程分支就像是书签，提醒着你上次连接远程仓库时上面各分支的位置。
+
+用(远程仓库名)/(分支名) 这样的形式表示远程分支
+
+1. fetch
+
+git fetch <远程仓库名 如 origin>
+
+2. push
+
+。你的本地分支不会被自动同步到你引入的远程分支中，除非你明确执行推送操作。换句话说，对于无意分享的，你尽可以保留为私人分
+支，而只推送那些协同工作的特性分支。
+
+git push (远程仓库名) ([可以是本地才有的]分支名)
+git push origin serverfix
+    意为“取出我的serverfix 本地分支，推送它来更新远程仓库origin的[本来可以没有的]serverfix 分支”
+若想把远程分支叫作awesomebranch，可以用
+    git push origin serverfix:awesomebranch
+    来推送数据。
+
+接下来，当你的协作者再次从服务器上获取数据 git fetch origin 时, 他们将得到一个新的远程分支origin/serverfix
+    * [new branch] serverfix -> origin/serverfix
+你仍然无法在本地编辑该远程仓库。换句话说，在本例中，你不会有一个新的serverfix 分支，
+有的只是一个你无法移动的origin/serverfix 指针。
+
+如果要把该内容合并到当前分支，可以运行
+    git merge origin/serverfix
+如果想要一份自己的serverfix 来开发，可以在远程分支的基础上分化出一个新的分支来：
+    $ git checkout -b serverfix origin/serverfix
+
+3. 跟踪分支
+
+从远程分支检出的本地分支，称为跟踪分支(tracking branch)。跟踪分支是一种和远程分支有直接联系的
+本地分支。在跟踪分支里输入git push，Git 会自行推断应该向哪个服务器的哪个分支推送数据。反过来，在
+这些分支里运行git pull 会获取所有远程索引，并把它们的数据都合并到本地分支中来。
+在克隆仓库时，Git 通常会自动创建一个master 分支来跟踪origin/master。这正是git push 和git pull 一开
+始就能正常工作的原因。
+
+git checkout -b [本地跟踪分支名] [远程名]/[分支名]
+
+如果要 本地分支名=远程分支名, 可简化(?)为
+git checkout --track [远程名]/[分支名]
+
+4. 删除远程分支
+
+如果不再需要某个远程分支了，比如搞定了某个特性并把它合并进了远程的master 分支
+可以用这个非常无厘头的语法来删除它：git push [远程名] :[分支名]。
+空格注意
+记住我们不久前见过的git push [远程名] [本地分支]:[远程分支] 语法，如
+果省略[本地分支]，那就等于是在说“在这里提取空白然后把它变成[远程分支]”。
+
+(怎样才能搞定一个远程分支呢? 当然是拖到本地改完push...)
+
+# 再论分支: 衍合rebase
+
+1.
+把 experiment 里产生的变化补丁在 master 里"打"一遍
+    $ git checkout experiment
+    $ git rebase master
+
+_类似于_
+    $ git checkout master
+    $ git merge experiment
+
+前者会把 experiment 分支的提交历史 接 到master上.
+    无冲突情形测试终了.
+    冲突:
+衍合按照每行改变发生的次序重演发生的改变，而合并是把最终结果合在一起。
+
+2.
+你可以经常使用衍合，确保在远程分支里的提交历史更清晰。比方说，某些项目自己不是维护者，但想帮
+点忙，就应该尽可能使用衍合：先在一个分支里进行开发，当准备向主项目提交补丁的时候，再把它衍合到
+origin/master 里面。这样，维护者就不需要做任何整合工作，只需根据你提供的仓库地址作一次快进，或者采
+纳你提交的补丁(((???)))。
+
+3. 丰富的命令
+git rebase 主分支 特性分支
+git rebase --onto 主分支 除了这个分支的变更 特性分支
+
+4. 衍合的风险
+
+
+那个推送C6 上来的人决定用衍合取代那次合并；他们用git push --force 覆盖了服务器上的历史，得到C4’。
+    这是否说明 git push --force 是危险的?

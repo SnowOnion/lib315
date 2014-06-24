@@ -1,0 +1,51 @@
+Git 试用记录, trouble shooting 预备
+
+1.
+在 testing 分支修改了文件, 没有 add, 或 add 后没有 commit, 就想 git checkout master
+----------
+HorseArcherLEE% git checkout master
+error: Your local changes to the following files would be overwritten by checkout:
+        readyou.py
+Please, commit your changes or stash them before you can switch branches.
+Aborting
+HorseArcherLEE%
+----------
+
+2.
+原来 Merge 冲突的地方会记在文件里面ORZ
+
+3.
+在 testing 分支修改了 readyou.py 和 不会冲突吧.txt;
+在 master 分支用另一种方式修改了 readyou.py, 删除了 不会冲突吧.txt
+
+checkout 到 master, 试图 merge testing
+-----------
+HorseArcherLEE% git merge testing
+CONFLICT (modify/delete): 不会冲突吧.txt deleted in HEAD and modified in testing. Version testing of 不会冲突吧.txt left in tree.
+Auto-merging readyou.py
+CONFLICT (content): Merge conflict in readyou.py
+Automatic merge failed; fix conflicts and then commit the result.
+
+## 然后
+
+HorseArcherLEE% git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Unmerged paths:
+  (use "git add/rm <file>..." as appropriate to mark resolution)
+
+        both modified:   readyou.py
+        deleted by us:   "\344\270\215\344\274\232\345\206\262\347\252\201\345\220\247.txt"
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+## 试图
+
+HorseArcherLEE% git checkout testing
+readyou.py: needs merge
+不会冲突吧.txt: needs merge
+error: you need to resolve your current index first
+
+--------
