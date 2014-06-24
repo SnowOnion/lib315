@@ -54,7 +54,11 @@ Github / Gitcafe 是两家网站, 它们都提供了基于 Git 的托管服务. 
 
 <!-- 如果没有特殊说明, 本节教程针对 Windows 环境, 使用 Github 托管服务. -->
 
-本节教程使用 Github 托管服务; 展示 Gitbash 方式 和 IDE + Git 插件方式 怎样使用 Git.
+<!-- 本节教程使用 Github 托管服务; 展示 Gitbash 方式 和 IDE + Git 插件方式 怎样使用 Git. -->
+
+本节教程使用 Github 托管服务; 展示怎样通过 Gitbash 方式使用 Git.
+
+*鉴于大家用的 IDE 百花齐放, 还是先不搞 IDE 插件方式了...*
 
 ## 1. 安装 Git 客户端
 + Win: 从[这里](http://pan.baidu.com/s/1jGuXcZs) 下安装包. 官网下很慢...
@@ -134,4 +138,6 @@ https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; �
 
 这会在当前文件夹下建立一个 badong-prototype 文件夹, 并且把仓库里的代码下载到那里.
 
-## 未完待续. 请不要随意 commit 和 push 到主分支(master). 请等一下分支部分的教程, 或自行学习一下《Pro git》中分支的部分...
+<!-- ## 未完待续. 请不要随意 commit 和 push 到主分支(master). 请等一下分支部分的教程, 或自行学习一下《Pro git》中分支的部分... -->
+
+## 6. 
