@@ -80,6 +80,7 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 具体操作: (来自 https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E8%AE%BE%E7%BD%AE-Git#wiki)
 + Windows: 打开刚才安的 Git 客户端里的 Gitbash
 + Linux / OS X: 打开终端
+
         cd ~/.ssh
     ( 如果提示文件夹不存在, 先 mkdir ~/.ssh )
         ssh-keygen -t rsa -C "在github注册的电子邮件地址_要带着引号"
