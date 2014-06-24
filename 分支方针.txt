@@ -1,0 +1,8 @@
+SnowOnion/lib315 里的分支
+    master 用于给 315outsource2011/lib315 (的 master?) 提交 pull request
+        不应含有写作材料, 应该只有 呈现给最终用户的作品.
+            怎么才能在不同分支之间方便地设定"合并时不管某些文件"?
+    writing 用于写作.
+
+315outsource2011/lib315 里的分支
+    没想好
