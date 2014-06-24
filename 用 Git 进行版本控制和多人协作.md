@@ -118,6 +118,8 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 
 我们的 组织 是 https://github.com/315outsource2011
 
+如果你还不是组织的成员, 请把 github username 告诉李天池, 好把你加进来.
+
 https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; 组织的每一个成员都是这个仓库的所有者, 可以进行任何操作.
 
 进入 https://github.com/315outsource2011/badong-prototype , 在右下角找到 HTTPS clone URL 或 SSH clone URL, 如果不是 SSH clone URL 就点 SSH 切换到 SSH clone URL.
@@ -129,7 +131,7 @@ https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; �
     cd 到合适的文件夹
 
     git clone git@github.com:315outsource2011/badong-prototype.git
-    
+
 这会在当前文件夹下建立一个 badong-prototype 文件夹, 并且把仓库里的代码下载到那里.
 
 ## 未完待续. 请不要随意 commit 和 push 到主分支(master). 请等一下分支部分的教程, 或自行学习一下《Pro git》中分支的部分...
