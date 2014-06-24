@@ -82,15 +82,26 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 + Linux / OS X: 打开终端
 
         cd ~/.ssh
+
     ( 如果提示文件夹不存在, 先 mkdir ~/.ssh )
-        ssh-keygen -t rsa -C "在github注册的电子邮件地址_要带着引号"
+
+        ssh-keygen -t rsa -C  "在github注册的电子邮件地址_要带着引号"
+
     ( 会询问存放rsa密钥的文件名, 回车, 使用默认文件名就可以了;
     会询问是否设定passphrase, 如果是自己的电脑, 回车, 使用空passphrase就可以了)
+
         网页登录 Github, 进入 https://github.com/settings/ssh , 选择 Add SSH key,
+
         用文本编辑器打开刚才生成的 ~/.ssh/id_rsa.pub, 把里面的内容粘贴到 Add SSH key 的 key 输入框里添加.
+
     运行以下命令测试是否添加成功:
+
         ssh -T git@github.com
+
     ( 会出现 authenticity 什么的, yes 就可以了)
+
     最终出现:
+
         Hi SnowOnion! You've successfully authenticated, but GitHub does not provide shell access.
+
     即为添加成功.
