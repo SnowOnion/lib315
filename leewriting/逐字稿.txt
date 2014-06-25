@@ -1,0 +1,19 @@
+
+# 万物操作无非是增删改查 (CRUD: create, read, update and delete)
+
++ 数据库的数据操作
+    insert
+    delete
+    set
+    select... where...
++ 文件系统
+    新建文件
+    删除文件
+    文件重命名; 修改属性
+    查找文件
++ 文件内容
+    增加内容
+    删除内容
+    修改内容
+    查看/查找内容
++ git
