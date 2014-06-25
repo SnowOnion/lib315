@@ -6,7 +6,7 @@
 
 # SnowOnion 的说明
 
-如果阅读过程中有难以理解的地方, 请告诉作者(李天池).
+如果阅读过程中有难以理解的地方, 请告诉作者.
 
 有一些我熟悉的知识点, 可能在写作中忽略了.
 
@@ -67,7 +67,7 @@ Github / Gitcafe 是两家网站, 它们都提供了基于 Git 的托管服务. 
 + OS X: 军神知道...
 
 ## 2. 注册 Github 帐号
-然后把 username 告诉李天池, 我好把你加到 315outsource2011这个 Github organazation 里.
+然后把 username 告诉 SnowOnion LEE, 我好把你加到 315outsource2011这个 Github organazation 里.
 
 ## 3. 生成用于 SSH 的密钥对儿, 添加 SSH 公钥
 (这里的 SSH 是 Secure Shell, 不是 Java 那个...)
@@ -122,7 +122,7 @@ HTTPS 每次都需要输入 Github 帐号和密码; SVN 机制不知道; SSH 机
 
 我们的 组织 是 https://github.com/315outsource2011
 
-如果你还不是组织的成员, 请把 github username 告诉李天池, 好把你加进来.
+如果你还不是组织的成员, 请把 github username 告诉 SnowOnion LEE, 好把你加进来.
 
 https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; 组织的每一个成员都是这个仓库的所有者, 可以进行任何操作.
 
@@ -140,4 +140,4 @@ https://github.com/315outsource2011/badong-prototype 是属于组织的仓库; �
 
 <!-- ## 未完待续. 请不要随意 commit 和 push 到主分支(master). 请等一下分支部分的教程, 或自行学习一下《Pro git》中分支的部分... -->
 
-## 6. 
+## 6. 建立分支
