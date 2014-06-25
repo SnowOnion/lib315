@@ -1,3 +1,5 @@
+常言说, 磨刀不误砍柴工. 常言又说, 工欲善其事, 必先利其器.
+
 
 # 万物操作无非是增删改查 (CRUD: create, read, update and delete)
 
